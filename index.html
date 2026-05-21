@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sailaja Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#f5f7fb;
+      color:#333;
+    }
+
+    /* Navbar */
+    nav{
+      width:100%;
+      background:#111827;
+      padding:18px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      z-index:1000;
+    }
+
+    .logo{
+      color:#fff;
+      font-size:30px;
+      font-family:'Pacifico',cursive;
+    }
+
+    nav ul{
+      display:flex;
+      list-style:none;
+      gap:25px;
+    }
+
+    nav ul li a{
+      color:#fff;
+      text-decoration:none;
+      font-size:16px;
+      transition:0.3s;
+    }
+
+    nav ul li a:hover{
+      color:#38bdf8;
+    }
+
+    /* Hero Section */
+    .hero{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      text-align:center;
+      background:linear-gradient(135deg,#38bdf8,#6366f1);
+      color:white;
+      padding:20px;
+    }
+
+    .hero h1{
+      font-size:65px;
+      font-family:'Pacifico',cursive;
+      margin-bottom:10px;
+    }
+
+    .hero p{
+      font-size:22px;
+    }
+
+    /* Sections */
+    section{
+      padding:90px 10%;
+    }
+
+    .section-title{
+      font-size:35px;
+      margin-bottom:25px;
+      color:#111827;
+      position:relative;
+    }
+
+    .section-title::after{
+      content:'';
+      width:70px;
+      height:4px;
+      background:#6366f1;
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      border-radius:10px;
+    }
+
+    .card{
+      background:#fff;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      margin-top:20px;
+    }
+
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .project-box{
+      background:white;
+      padding:20px;
+      border-radius:15px;
+      box-shadow:0 5px 12px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+
+    .project-box:hover{
+      transform:translateY(-5px);
+    }
+
+    footer{
+      background:#111827;
+      color:white;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+    }
+
+    @media(max-width:768px){
+
+      nav{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:45px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Sailaja</div>
+
+    <ul>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#qualification">Qualification</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#location">Location</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Sailaja</h1>
+    <p>Web Developer | Designer | Learner</p>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+
+    <div class="card">
+      <p>
+        Hello! I am Sailaja, a passionate web developer interested in creating
+        beautiful and responsive websites. I enjoy learning new technologies
+        and building creative projects.
+      </p>
+    </div>
+  </section>
+
+  <!-- Qualification -->
+  <section id="qualification">
+    <h2 class="section-title">Qualification</h2>
+
+    <div class="card">
+      <p><strong>Degree:</strong> B.Tech / Graduation</p>
+      <p><strong>Skills:</strong> HTML, CSS, JavaScript, Python</p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects">
+
+      <div class="project-box">
+        <h3>Portfolio Website</h3>
+        <p>Created a personal responsive portfolio website using HTML and CSS.</p>
+      </div>
+
+      <div class="project-box">
+        <h3>Shopping Website</h3>
+        <p>Developed a shopping login and signup page using JavaScript.</p>
+      </div>
+
+      <div class="project-box">
+        <h3>Machine Learning Project</h3>
+        <p>Prediction for factory equipment using Machine Learning.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+
+    <div class="card">
+      <p><strong>Name:</strong> Sailaja</p>
+      <p><strong>Email:</strong> sailaja@gmail.com</p>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section id="location">
+    <h2 class="section-title">Location</h2>
+
+    <div class="card">
+      <p>Sajjapuram, Andhra Pradesh, India</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Sailaja Portfolio Website</p>
+  </footer>
+
+</body>
+</html>
