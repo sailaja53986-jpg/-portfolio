@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Sailaja Portfolio</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+
     *{
       margin:0;
       padding:0;
@@ -18,141 +20,260 @@
 
     body{
       font-family:'Poppins',sans-serif;
-      background:#f5f7fb;
-      color:#333;
+      background:#0f172a;
+      color:white;
+      overflow-x:hidden;
     }
 
     /* Navbar */
+
     nav{
       width:100%;
-      background:#111827;
-      padding:18px 8%;
+      padding:16px 8%;
       display:flex;
       justify-content:space-between;
       align-items:center;
       position:fixed;
       top:0;
       z-index:1000;
+      backdrop-filter:blur(10px);
+      background:rgba(15,23,42,0.7);
+      border-bottom:1px solid rgba(255,255,255,0.1);
     }
 
     .logo{
-      color:#fff;
-      font-size:30px;
-      font-family:'Pacifico',cursive;
+      font-size:32px;
+      font-family:'Playfair Display',serif;
+      color:#38bdf8;
+      font-weight:700;
+      letter-spacing:2px;
+      animation:slideLeft 1s ease;
     }
 
-    nav ul{
-      display:flex;
-      list-style:none;
-      gap:25px;
-    }
-
-    nav ul li a{
-      color:#fff;
+    .nav-links a{
       text-decoration:none;
-      font-size:16px;
+      color:white;
+      margin-left:22px;
+      font-size:15px;
+      position:relative;
       transition:0.3s;
     }
 
-    nav ul li a:hover{
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      width:0%;
+      height:2px;
+      background:#38bdf8;
+      left:0;
+      bottom:-5px;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .nav-links a:hover{
       color:#38bdf8;
     }
 
     /* Hero Section */
+
     .hero{
-      height:100vh;
+      min-height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
       flex-direction:column;
       text-align:center;
-      background:linear-gradient(135deg,#38bdf8,#6366f1);
-      color:white;
-      padding:20px;
+      padding:100px 8% 40px;
+      background:
+      radial-gradient(circle at top left,#1e3a8a,transparent 35%),
+      radial-gradient(circle at bottom right,#0ea5e9,transparent 30%),
+      #0f172a;
     }
 
     .hero h1{
-      font-size:65px;
-      font-family:'Pacifico',cursive;
-      margin-bottom:10px;
+      font-size:80px;
+      font-family:'Playfair Display',serif;
+      color:#ffffff;
+      animation:fadeUp 1s ease;
+    }
+
+    .hero h1 span{
+      color:#38bdf8;
     }
 
     .hero p{
-      font-size:22px;
+      max-width:700px;
+      margin-top:18px;
+      font-size:19px;
+      line-height:1.7;
+      color:#d1d5db;
+      animation:fadeUp 1.3s ease;
+    }
+
+    .hero-btn{
+      margin-top:28px;
+      padding:14px 34px;
+      border:none;
+      border-radius:40px;
+      background:#38bdf8;
+      color:#0f172a;
+      font-size:16px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.4s;
+      animation:fadeUp 1.6s ease;
+    }
+
+    .hero-btn:hover{
+      transform:translateY(-4px) scale(1.05);
+      box-shadow:0 0 20px #38bdf8;
     }
 
     /* Sections */
+
     section{
-      padding:90px 10%;
+      padding:50px 8%;
     }
 
     .section-title{
-      font-size:35px;
-      margin-bottom:25px;
-      color:#111827;
-      position:relative;
+      font-size:42px;
+      text-align:center;
+      margin-bottom:28px;
+      font-family:'Playfair Display',serif;
+      color:#38bdf8;
     }
 
-    .section-title::after{
-      content:'';
-      width:70px;
-      height:4px;
-      background:#6366f1;
-      position:absolute;
-      left:0;
-      bottom:-8px;
-      border-radius:10px;
-    }
+    /* Cards */
 
     .card{
-      background:#fff;
-      padding:25px;
-      border-radius:15px;
-      box-shadow:0 5px 15px rgba(0,0,0,0.1);
-      margin-top:20px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px;
+      padding:28px;
+      backdrop-filter:blur(12px);
+      transition:0.4s;
+      animation:fadeUp 1s ease;
     }
 
-    .projects{
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 25px rgba(56,189,248,0.3);
+    }
+
+    .card p{
+      color:#d1d5db;
+      line-height:1.8;
+      font-size:17px;
+    }
+
+    /* Qualification */
+
+    .qualification-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
       gap:20px;
     }
 
-    .project-box{
-      background:white;
-      padding:20px;
-      border-radius:15px;
-      box-shadow:0 5px 12px rgba(0,0,0,0.1);
-      transition:0.3s;
+    .qualification-box{
+      padding:24px;
+      border-radius:18px;
+      text-align:center;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      transition:0.4s;
     }
 
-    .project-box:hover{
-      transform:translateY(-5px);
+    .qualification-box:hover{
+      transform:translateY(-6px);
+      background:#1e293b;
     }
+
+    .qualification-box h3{
+      color:#38bdf8;
+      margin-bottom:10px;
+      font-size:24px;
+    }
+
+    .qualification-box p{
+      color:#d1d5db;
+    }
+
+    /* Contact */
+
+    .contact-box{
+      text-align:center;
+      line-height:2;
+      font-size:18px;
+    }
+
+    /* Footer */
 
     footer{
-      background:#111827;
-      color:white;
-      text-align:center;
       padding:20px;
-      margin-top:40px;
+      text-align:center;
+      color:#cbd5e1;
+      border-top:1px solid rgba(255,255,255,0.1);
+      margin-top:20px;
     }
+
+    /* Animations */
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes slideLeft{
+      from{
+        opacity:0;
+        transform:translateX(-50px);
+      }
+      to{
+        opacity:1;
+        transform:translateX(0);
+      }
+    }
+
+    /* Mobile */
 
     @media(max-width:768px){
 
+      .hero h1{
+        font-size:52px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
       nav{
         flex-direction:column;
-        gap:15px;
+        gap:12px;
       }
 
-      nav ul{
-        flex-wrap:wrap;
-        justify-content:center;
+      .nav-links{
+        text-align:center;
       }
 
-      .hero h1{
-        font-size:45px;
+      .nav-links a{
+        margin:8px;
+        display:inline-block;
       }
+
+      .section-title{
+        font-size:34px;
+      }
+
     }
 
   </style>
@@ -161,93 +282,136 @@
 <body>
 
   <!-- Navbar -->
+
   <nav>
+
     <div class="logo">Sailaja</div>
 
-    <ul>
-      <li><a href="#about">About Me</a></li>
-      <li><a href="#qualification">Qualification</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact Us</a></li>
-      <li><a href="#location">Location</a></li>
-    </ul>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#qualification">Qualification</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <h1>Sailaja</h1>
-    <p>Web Developer | Designer | Learner</p>
-  </section>
+
+  <div class="hero">
+
+    <h1>Hello, I'm <span>Sailaja</span></h1>
+
+    <p>
+      Passionate about web development and machine learning.
+      I love building modern websites and intelligent solutions
+      that solve real-world problems.
+    </p>
+
+    <button class="hero-btn">
+      Explore Portfolio
+    </button>
+
+  </div>
 
   <!-- About -->
+
   <section id="about">
+
     <h2 class="section-title">About Me</h2>
 
     <div class="card">
+
       <p>
-        Hello! I am Sailaja, a passionate web developer interested in creating
-        beautiful and responsive websites. I enjoy learning new technologies
-        and building creative projects.
+        I am Sailaja from Tanuku with a strong interest in technology,
+        web designing, and machine learning. I enjoy creating modern
+        user-friendly websites and continuously improving my technical skills.
       </p>
+
     </div>
+
   </section>
 
   <!-- Qualification -->
+
   <section id="qualification">
+
     <h2 class="section-title">Qualification</h2>
 
-    <div class="card">
-      <p><strong>Degree:</strong> B.Tech / Graduation</p>
-      <p><strong>Skills:</strong> HTML, CSS, JavaScript, Python</p>
+    <div class="qualification-grid">
+
+      <div class="qualification-box">
+        <h3>10th</h3>
+        <p>KSR ZPH School</p>
+      </div>
+
+      <div class="qualification-box">
+        <h3>Intermediate</h3>
+        <p>SKSD Mahila Kalasala</p>
+      </div>
+
+      <div class="qualification-box">
+        <h3>Degree</h3>
+        <p>SKSD Mahila Kalasala</p>
+      </div>
+
+      <div class="qualification-box">
+        <h3>PG</h3>
+        <p>DNR College</p>
+      </div>
+
     </div>
+
   </section>
 
   <!-- Projects -->
+
   <section id="projects">
+
     <h2 class="section-title">Projects</h2>
 
-    <div class="projects">
+    <div class="card">
 
-      <div class="project-box">
-        <h3>Portfolio Website</h3>
-        <p>Created a personal responsive portfolio website using HTML and CSS.</p>
-      </div>
+      <p>
 
-      <div class="project-box">
-        <h3>Shopping Website</h3>
-        <p>Developed a shopping login and signup page using JavaScript.</p>
-      </div>
+        <strong style="color:#38bdf8; font-size:20px;">
+          Predictive Maintenance for Factory Using Machine Learning
+        </strong>
 
-      <div class="project-box">
-        <h3>Machine Learning Project</h3>
-        <p>Prediction for factory equipment using Machine Learning.</p>
-      </div>
+        <br><br>
+
+        Developed a machine learning-based predictive maintenance system
+        that analyzes factory equipment data to predict failures before they occur.
+        This helps reduce maintenance costs and improve operational efficiency.
+
+      </p>
 
     </div>
+
   </section>
 
   <!-- Contact -->
+
   <section id="contact">
+
     <h2 class="section-title">Contact Us</h2>
 
-    <div class="card">
+    <div class="card contact-box">
+
       <p><strong>Name:</strong> Sailaja</p>
+
       <p><strong>Email:</strong> sailaja@gmail.com</p>
-    </div>
-  </section>
 
-  <!-- Location -->
-  <section id="location">
-    <h2 class="section-title">Location</h2>
+      <p><strong>Location:</strong> Tanuku</p>
 
-    <div class="card">
-      <p>Sajjapuram, Andhra Pradesh, India</p>
     </div>
+
   </section>
 
   <!-- Footer -->
+
   <footer>
-    <p>© 2026 Sailaja Portfolio Website</p>
+    © 2026 Sailaja Portfolio | Designed with Modern UI
   </footer>
 
 </body>
