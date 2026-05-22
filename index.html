@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>User Signup Page</title>
-
-  <!-- Supabase CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>Student Portal</title>
 
   <style>
 
@@ -19,19 +16,20 @@
     }
 
     body{
+      background:linear-gradient(135deg,#4facfe,#00f2fe);
       min-height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      background:linear-gradient(135deg,#4facfe,#00f2fe);
-      padding:20px;
+      padding:15px;
     }
 
     .container{
-      width:400px;
-      background:#fff;
-      padding:30px;
+      width:100%;
+      max-width:400px;
+      background:white;
       border-radius:15px;
+      padding:25px;
       box-shadow:0 5px 15px rgba(0,0,0,0.2);
     }
 
@@ -52,16 +50,18 @@
       color:#444;
     }
 
-    .input-box input{
+    .input-box input,
+    .input-box select{
       width:100%;
-      padding:10px;
+      padding:12px;
       border:1px solid #ccc;
       border-radius:8px;
-      font-size:16px;
       outline:none;
+      font-size:16px;
     }
 
-    .input-box input:focus{
+    .input-box input:focus,
+    .input-box select:focus{
       border-color:#4facfe;
     }
 
@@ -72,7 +72,7 @@
       border-radius:8px;
       background:#4facfe;
       color:white;
-      font-size:18px;
+      font-size:17px;
       cursor:pointer;
     }
 
@@ -80,10 +80,49 @@
       background:#00c6fb;
     }
 
-    #message{
-      margin-top:15px;
+    .toggle-text{
       text-align:center;
+      margin-top:15px;
+    }
+
+    .toggle-text a{
+      color:#4facfe;
       font-weight:bold;
+      text-decoration:none;
+      cursor:pointer;
+    }
+
+    #message{
+      text-align:center;
+      margin-top:15px;
+      font-weight:bold;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+      font-size:14px;
+    }
+
+    table th{
+      background:#4facfe;
+      color:white;
+      padding:10px;
+    }
+
+    table td{
+      padding:10px;
+      border-bottom:1px solid #ddd;
+      text-align:center;
+    }
+
+    table tr:hover{
+      background:#f1f1f1;
+    }
+
+    #studentPage{
+      display:none;
     }
 
   </style>
@@ -91,128 +130,245 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- LOGIN / SIGNUP PAGE -->
+  <div class="container" id="authPage">
 
-    <h2>Signup Form</h2>
+    <h2 id="title">Sign Up</h2>
 
-    <div class="input-box">
-      <label>Full Name</label>
-      <input type="text" id="name" placeholder="Enter full name">
+    <!-- Signup Form -->
+    <div id="signupForm">
+
+      <div class="input-box">
+        <label>Name</label>
+        <input type="text" id="signupName" placeholder="Enter name">
+      </div>
+
+      <div class="input-box">
+        <label>Email</label>
+        <input type="email" id="signupEmail" placeholder="Enter email">
+      </div>
+
+      <div class="input-box">
+        <label>Password</label>
+        <input type="password" id="signupPassword" placeholder="Enter password">
+      </div>
+
+      <button onclick="signup()">Create Account</button>
+
+      <div class="toggle-text">
+        Already have an account?
+        <a onclick="showLogin()">Sign In</a>
+      </div>
+
     </div>
 
-    <div class="input-box">
-      <label>User Name</label>
-      <input type="text" id="username" placeholder="Enter username">
-    </div>
+    <!-- Login Form -->
+    <div id="loginForm" style="display:none;">
 
-    <div class="input-box">
-      <label>Mobile Number</label>
-      <input type="text" id="mobile" placeholder="Enter mobile number">
-    </div>
+      <div class="input-box">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter email">
+      </div>
 
-    <div class="input-box">
-      <label>Email</label>
-      <input type="email" id="email" placeholder="Enter email">
-    </div>
+      <div class="input-box">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password">
+      </div>
 
-    <div class="input-box">
-      <label>Location</label>
-      <input type="text" id="location" placeholder="Enter location">
-    </div>
+      <button onclick="login()">Login</button>
 
-    <div class="input-box">
-      <label>Password</label>
-      <input type="password" id="password" placeholder="Enter password">
-    </div>
+      <div class="toggle-text">
+        Don't have an account?
+        <a onclick="showSignup()">Create Account</a>
+      </div>
 
-    <button onclick="signup()">Create Account</button>
+    </div>
 
     <div id="message"></div>
 
   </div>
 
+  <!-- STUDENT DETAILS PAGE -->
+  <div class="container" id="studentPage">
+
+    <h2>Student Details</h2>
+
+    <div class="input-box">
+      <label>Student Name</label>
+      <input type="text" id="studentName" placeholder="Enter student name">
+    </div>
+
+    <div class="input-box">
+      <label>Roll Number</label>
+      <input type="text" id="rollNumber" placeholder="Enter roll number">
+    </div>
+
+    <div class="input-box">
+      <label>Branch</label>
+      <select id="branch">
+        <option value="">Select Branch</option>
+        <option>CSE</option>
+        <option>ECE</option>
+        <option>EEE</option>
+        <option>MECH</option>
+        <option>CIVIL</option>
+      </select>
+    </div>
+
+    <div class="input-box">
+      <label>Year</label>
+      <select id="year">
+        <option value="">Select Year</option>
+        <option>1st Year</option>
+        <option>2nd Year</option>
+        <option>3rd Year</option>
+        <option>4th Year</option>
+      </select>
+    </div>
+
+    <button onclick="addStudent()">Add Student</button>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Roll</th>
+          <th>Branch</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+
+      <tbody id="studentTable">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
   <script>
 
-    // ==================================
-    // SUPABASE URL & ANON KEY
-    // ==================================
+    let users = [];
+    let count = 1;
 
-    const SUPABASE_URL =
-      "https://ipudyahkijaofyuhzdtv.supabase.co";
+    // Show Login
+    function showLogin(){
 
-    const SUPABASE_ANON_KEY =
-      "sb_publishable_sEOEdQLjc99aRtQPVEPDTQ_PczbVtB3";
+      document.getElementById("signupForm").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+      document.getElementById("title").innerHTML = "Login";
+      document.getElementById("message").innerHTML = "";
 
-    // ==================================
+    }
 
-    const client = supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
+    // Show Signup
+    function showSignup(){
 
-    async function signup(){
+      document.getElementById("signupForm").style.display = "block";
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("title").innerHTML = "Sign Up";
+      document.getElementById("message").innerHTML = "";
 
-      const name = document.getElementById("name").value;
-      const username = document.getElementById("username").value;
-      const mobile = document.getElementById("mobile").value;
-      const email = document.getElementById("email").value;
-      const location = document.getElementById("location").value;
-      const password = document.getElementById("password").value;
+    }
 
-      // Validation
-      if(
-        name === "" ||
-        username === "" ||
-        mobile === "" ||
-        email === "" ||
-        location === "" ||
-        password === ""
-      ){
+    // Signup Function
+    function signup(){
+
+      let name = document.getElementById("signupName").value;
+      let email = document.getElementById("signupEmail").value;
+      let password = document.getElementById("signupPassword").value;
+
+      if(name==="" || email==="" || password===""){
         alert("Please fill all fields");
         return;
       }
 
-      if(mobile.length !== 10){
-        alert("Enter valid 10 digit mobile number");
-        return;
-      }
+      users.push({
+        name:name,
+        email:email,
+        password:password
+      });
 
-      // Insert Data into Supabase
-      const { data, error } = await client
-        .from("users")
-        .insert([
-          {
-            name: name,
-            username: username,
-            mobile: mobile,
-            email: email,
-            location: location,
-            password: password
-          }
-        ]);
+      document.getElementById("message").innerHTML =
+        "Account Created Successfully!";
 
-      if(error){
+      document.getElementById("message").style.color = "green";
 
-        document.getElementById("message").innerHTML =
-          error.message;
+      // Clear fields
+      document.getElementById("signupName").value = "";
+      document.getElementById("signupEmail").value = "";
+      document.getElementById("signupPassword").value = "";
 
-        document.getElementById("message").style.color = "red";
+      showLogin();
+
+    }
+
+    // Login Function
+    function login(){
+
+      let email = document.getElementById("loginEmail").value;
+      let password = document.getElementById("loginPassword").value;
+
+      let userFound = users.find(user =>
+        user.email === email &&
+        user.password === password
+      );
+
+      if(userFound){
+
+        // Hide auth page
+        document.getElementById("authPage").style.display = "none";
+
+        // Show student page
+        document.getElementById("studentPage").style.display = "block";
 
       } else {
 
         document.getElementById("message").innerHTML =
-          "Signup Successful!";
+          "Invalid Email or Password";
 
-        document.getElementById("message").style.color = "green";
-
-        // Clear Form
-        document.getElementById("name").value = "";
-        document.getElementById("username").value = "";
-        document.getElementById("mobile").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("location").value = "";
-        document.getElementById("password").value = "";
+        document.getElementById("message").style.color = "red";
       }
+
+    }
+
+    // Add Student
+    function addStudent(){
+
+      let name = document.getElementById("studentName").value;
+      let roll = document.getElementById("rollNumber").value;
+      let branch = document.getElementById("branch").value;
+      let year = document.getElementById("year").value;
+
+      if(name==="" || roll==="" || branch==="" || year===""){
+        alert("Please fill all student details");
+        return;
+      }
+
+      let table = document.getElementById("studentTable");
+
+      let row = `
+        <tr>
+          <td>${count}</td>
+          <td>${name}</td>
+          <td>${roll}</td>
+          <td>${branch}</td>
+          <td>${year}</td>
+        </tr>
+      `;
+
+      table.innerHTML += row;
+
+      count++;
+
+      // Clear fields
+      document.getElementById("studentName").value = "";
+      document.getElementById("rollNumber").value = "";
+      document.getElementById("branch").value = "";
+      document.getElementById("year").value = "";
+
     }
 
   </script>
