@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Advanced Signup Form</title>
+  <title>User Signup Page</title>
 
   <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -19,16 +19,16 @@
     }
 
     body{
-      background:linear-gradient(135deg,#4facfe,#00f2fe);
       min-height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
+      background:linear-gradient(135deg,#4facfe,#00f2fe);
       padding:20px;
     }
 
     .container{
-      width:420px;
+      width:400px;
       background:#fff;
       padding:30px;
       border-radius:15px;
@@ -52,8 +52,7 @@
       color:#444;
     }
 
-    .input-box input,
-    .input-box textarea{
+    .input-box input{
       width:100%;
       padding:10px;
       border:1px solid #ccc;
@@ -62,14 +61,8 @@
       outline:none;
     }
 
-    .input-box input:focus,
-    .input-box textarea:focus{
+    .input-box input:focus{
       border-color:#4facfe;
-    }
-
-    textarea{
-      resize:none;
-      height:80px;
     }
 
     button{
@@ -100,7 +93,7 @@
 
   <div class="container">
 
-    <h2>User Signup Form</h2>
+    <h2>Signup Form</h2>
 
     <div class="input-box">
       <label>Full Name</label>
@@ -118,18 +111,13 @@
     </div>
 
     <div class="input-box">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Enter email">
+    </div>
+
+    <div class="input-box">
       <label>Location</label>
       <input type="text" id="location" placeholder="Enter location">
-    </div>
-
-    <div class="input-box">
-      <label>Address</label>
-      <textarea id="address" placeholder="Enter address"></textarea>
-    </div>
-
-    <div class="input-box">
-      <label>Details</label>
-      <textarea id="details" placeholder="Enter details"></textarea>
     </div>
 
     <div class="input-box">
@@ -145,9 +133,9 @@
 
   <script>
 
-    // ====================================
+    // ==================================
     // SUPABASE URL & ANON KEY
-    // ====================================
+    // ==================================
 
     const SUPABASE_URL =
       "https://ipudyahkijaofyuhzdtv.supabase.co";
@@ -155,7 +143,7 @@
     const SUPABASE_ANON_KEY =
       "sb_publishable_sEOEdQLjc99aRtQPVEPDTQ_PczbVtB3";
 
-    // ====================================
+    // ==================================
 
     const client = supabase.createClient(
       SUPABASE_URL,
@@ -167,9 +155,8 @@
       const name = document.getElementById("name").value;
       const username = document.getElementById("username").value;
       const mobile = document.getElementById("mobile").value;
+      const email = document.getElementById("email").value;
       const location = document.getElementById("location").value;
-      const address = document.getElementById("address").value;
-      const details = document.getElementById("details").value;
       const password = document.getElementById("password").value;
 
       // Validation
@@ -177,9 +164,8 @@
         name === "" ||
         username === "" ||
         mobile === "" ||
+        email === "" ||
         location === "" ||
-        address === "" ||
-        details === "" ||
         password === ""
       ){
         alert("Please fill all fields");
@@ -191,7 +177,7 @@
         return;
       }
 
-      // Insert data into users table
+      // Insert Data into Supabase
       const { data, error } = await client
         .from("users")
         .insert([
@@ -199,9 +185,8 @@
             name: name,
             username: username,
             mobile: mobile,
+            email: email,
             location: location,
-            address: address,
-            details: details,
             password: password
           }
         ]);
@@ -224,9 +209,8 @@
         document.getElementById("name").value = "";
         document.getElementById("username").value = "";
         document.getElementById("mobile").value = "";
+        document.getElementById("email").value = "";
         document.getElementById("location").value = "";
-        document.getElementById("address").value = "";
-        document.getElementById("details").value = "";
         document.getElementById("password").value = "";
       }
     }
